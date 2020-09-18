@@ -21,13 +21,35 @@ public class FoodInfomationDao {
 		getConnection();
 	}
 
-	public FoodInfomation doSearch(String foodName) {
+	public FoodInfomation doSearch(String foodName)
 		throws CalorieException{
 			//食材情報
+			FoodInfomation foodInfo = null;
+			try {
+				//検索実行
+				String sql = "SELECT * FROM foodInfo WHERE foodName = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, foodName);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					String useName = rs.getString("foodName");
+					String usePro = rs.getString("protein");
+					String useFat = rs.getString("fat");
+					String useCarbo = rs.getString("carbohydrates");
+					String useRemarks = rs.getString("remarks");
+					foodInfo = new FoodInfomation(useName,usePro,useFat,useCarbo,useRemarks);
+				}
 
-
-		}
-		return null;
+				//結果を確認
+				if(foodInfo == null) {
+					throw new CalorieException("取得できませんでした");
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+				throw new CalorieException("SQL実行中に例外が発生しました");
+			}
+		//食材の情報を返却
+		return foodInfo;
 	}
 
 	//DB接続メソッド
