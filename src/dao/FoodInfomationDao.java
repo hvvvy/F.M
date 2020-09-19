@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import exception.CalorieException;
-import model.FoodInfomation;
+import model.Calculation;
 
 public class FoodInfomationDao {
 
@@ -21,10 +21,10 @@ public class FoodInfomationDao {
 		getConnection();
 	}
 
-	public FoodInfomation doSearch(String foodName)
+	public Calculation doSearch(String foodName,int weight)
 		throws CalorieException{
 			//食材情報
-			FoodInfomation foodInfo = null;
+			Calculation foodInfo = null;
 			try {
 				//検索実行
 				String sql = "SELECT * FROM foodInfo WHERE foodName = ?";
@@ -32,12 +32,15 @@ public class FoodInfomationDao {
 				ps.setString(1, foodName);
 				rs = ps.executeQuery();
 				while(rs.next()) {
+
+					//int weight = Integer.parseInt(request.getParameter("weight"));
+
 					String useName = rs.getString("foodName");
 					String usePro = rs.getString("protein");
 					String useFat = rs.getString("fat");
 					String useCarbo = rs.getString("carbohydrates");
 					String useRemarks = rs.getString("remarks");
-					foodInfo = new FoodInfomation(useName,usePro,useFat,useCarbo,useRemarks);
+					foodInfo = new Calculation(useName,usePro,useFat,useCarbo,useRemarks,weight);
 				}
 
 				//結果を確認
