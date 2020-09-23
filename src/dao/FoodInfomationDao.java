@@ -24,35 +24,39 @@ public class FoodInfomationDao {
 	public Calculation doSearch(String foodName,int weight)
 		throws CalorieException{
 			//食材情報
-			Calculation foodInfo = null;
+			Calculation calculation = null;
 			try {
 				//検索実行
-				String sql = "SELECT * FROM foodInfo WHERE foodName = ?";
+				String sql = "SELECT * FROM food_infomation WHERE food_name = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, foodName);
 				rs = ps.executeQuery();
 				while(rs.next()) {
 
-					//int weight = Integer.parseInt(request.getParameter("weight"));
-
-					String useName = rs.getString("foodName");
-					String usePro = rs.getString("protein");
-					String useFat = rs.getString("fat");
-					String useCarbo = rs.getString("carbohydrates");
-					String useRemarks = rs.getString("remarks");
-					foodInfo = new Calculation(useName,usePro,useFat,useCarbo,useRemarks,weight);
+					String pro = rs.getString("protein");
+					String fat = rs.getString("fat");
+					String carbo = rs.getString("carbohydrate");
+					String remarks = rs.getString("remarks");
+					calculation = new Calculation(foodName,weight,pro,fat,carbo,remarks);
 				}
 
 				//結果を確認
-				if(foodInfo == null) {
+				if(calculation == null) {
 					throw new CalorieException("取得できませんでした");
 				}
 			}catch(SQLException e) {
 				e.printStackTrace();
 				throw new CalorieException("SQL実行中に例外が発生しました");
+			}finally {
+				//DBの接続解除処理
+				try {
+				close();
+				}catch(CalorieException e){
+					e.printStackTrace();
+				}
 			}
 		//食材の情報を返却
-		return foodInfo;
+		return calculation;
 	}
 
 	//DB接続メソッド
@@ -60,7 +64,7 @@ public class FoodInfomationDao {
 		try {
 			if(con == null) {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url = "jdbc:mysql://localhost/campus?serverTimezone=JST";
+				String url = "jdbc:mysql://localhost/foodinfomation?serverTimezone=JST";
 				String user = "root";
 				String password = "root";
 				//DB接続
@@ -91,6 +95,4 @@ public class FoodInfomationDao {
 			throw new CalorieException("close処理中に例外が発生しました");
 		}
 	}
-
-
 }

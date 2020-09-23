@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import dao.FoodInfomationDao;
 import exception.CalorieException;
 import model.Calculation;
 import model.FoodInfomation;
+import model.FoodInfomationManager;
 
 
 @WebServlet("/CalculationServlet")
@@ -31,6 +33,7 @@ public class CalculationServlet extends HttpServlet {
 			//取得した情報を基にCaluclationクラスで計算
 			Calculation calculation = foodInfoDao.doSearch(foodName,weight);
 			//計算された情報をmodelクラスに格納
+			//このfoodInfoはdetail.jsp(詳細画面)で使用
 			FoodInfomation foodInfo = calculation.getResult();
 
 			//セッションを取得
@@ -40,17 +43,31 @@ public class CalculationServlet extends HttpServlet {
 					(ArrayList<FoodInfomation>)session.getAttribute("list");
 
 			//モデルに一覧追加処理を指示
+			FoodInfomationManager foodInfoManager = new FoodInfomationManager();
+			foodInfoList = foodInfoManager.getFoodInfoList(
+					foodInfoList, foodInfo.getFoodName(), foodInfo.getWeight(), foodInfo.getCal());
+
+			//セッションに設定
+			session.setAttribute("list", foodInfoList);
 
 		} catch (CalorieException e) {
-
 			e.printStackTrace();
 		}
 
-		doGet(request, response);
+		//セッションの情報を表示させるためにもう一度計算画面を表示
+		RequestDispatcher rd = request.getRequestDispatcher("calculation.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		session.invalidate();
+
+		//セッションの情報をクリアしてもう一度計算画面を表示
+		RequestDispatcher rd =
+				request.getRequestDispatcher("calculation.jsp");
+		rd.forward(request, response);
 	}
 }
