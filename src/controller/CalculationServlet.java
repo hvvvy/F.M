@@ -26,6 +26,7 @@ public class CalculationServlet extends HttpServlet {
 		String foodName = request.getParameter("foodName");
 		int weight = Integer.parseInt(request.getParameter("weight"));
 
+
 		//入力された食材名を基にDBにログイン処理
 		//なければ例外（CalorieException)を発生させる
 		try {

@@ -16,13 +16,19 @@
 		%>
 				<%=foodInfoList.get(i).getFoodName()%>
 				<%=foodInfoList.get(i).getWeight() %>g　は
-				<%=foodInfoList.get(i).getCal() %>cal
+				<%=foodInfoList.get(i).getCal() %>kcal
 
 			<p>
 				タンパク質　<%=foodInfoList.get(i).getPro()%>g<br>
 				脂質　　　　<%=foodInfoList.get(i).getFat()%>g<br>
 				炭水化物　<%=foodInfoList.get(i).getCarbo()%>g<br><br>
-				備考：<%=foodInfoList.get(i).getRemarks()%>
+				<%
+					if(foodInfoList.get(i).getRemarks() != null){
+				%>
+					備考：<%=foodInfoList.get(i).getRemarks()%>
+				<%
+					}
+				%>
 			</p>
 		<%
 			}
