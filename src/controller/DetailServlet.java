@@ -17,6 +17,10 @@ public class DetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		int num = Integer.parseInt(request.getParameter("num"));
+
+		request.setAttribute("num", num);
+
 		//詳細画面へ遷移
 		RequestDispatcher rd =
 				request.getRequestDispatcher("detail.jsp");

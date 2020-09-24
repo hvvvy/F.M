@@ -23,7 +23,7 @@
 	%>
 			<tr>
 				<td><%=(i+1) %></td>
-				<td><a href="DetailServlet"><%=foodInfoList.get(i).getFoodName() %></a></td>
+				<td><a href="DetailServlet?num=<%=(i)%>"><%=foodInfoList.get(i).getFoodName() %></a></td>
 				<td><%=foodInfoList.get(i).getWeight() %>g　は</td>
 				<td><%=foodInfoList.get(i).getCal() %>kcal</td>
 			</tr>

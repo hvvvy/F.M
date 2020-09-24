@@ -12,27 +12,24 @@
 		<%
 		ArrayList<FoodInfomation> foodInfoList =
 		(ArrayList<FoodInfomation>)session.getAttribute("list");
-			for(int i = 0;i < foodInfoList.size();i++){
-		%>
-				<%=foodInfoList.get(i).getFoodName()%>
-				<%=foodInfoList.get(i).getWeight() %>g　は
-				<%=foodInfoList.get(i).getCal() %>kcal
+		int num = (Integer)request.getAttribute("num");
 
-			<p>
-				タンパク質　<%=foodInfoList.get(i).getPro()%>g<br>
-				脂質　　　　<%=foodInfoList.get(i).getFat()%>g<br>
-				炭水化物　<%=foodInfoList.get(i).getCarbo()%>g<br><br>
-				<%
-					if(foodInfoList.get(i).getRemarks() != null){
-				%>
-					備考：<%=foodInfoList.get(i).getRemarks()%>
-				<%
-					}
-				%>
-			</p>
-		<%
-			}
 		%>
+				<%=foodInfoList.get(num).getFoodName()%>
+				<%=foodInfoList.get(num).getWeight() %>g　は
+				<%=foodInfoList.get(num).getCal() %>cal
+			<p>
+				タンパク質　<%=foodInfoList.get(num).getPro()%>g<br>
+				脂質　　　　<%=foodInfoList.get(num).getFat()%>g<br>
+				炭水化物　<%=foodInfoList.get(num).getCarbo()%>g<br><br>
+			<%
+				if(foodInfoList.get(num).getRemarks() != null){
+			%>
+					備考：<%=foodInfoList.get(num).getRemarks()%>
+			<%
+				}
+			%>
+			</p>
 	<p><a href="calculation.jsp">戻る</a></p>
 </body>
 </html>
