@@ -45,7 +45,15 @@ public class CalculationServlet extends HttpServlet {
 			//モデルに一覧追加処理を指示
 			FoodInfomationManager foodInfoManager = new FoodInfomationManager();
 			foodInfoList = foodInfoManager.getFoodInfoList(
-					foodInfoList, foodInfo.getFoodName(), foodInfo.getWeight(), foodInfo.getCal());
+					foodInfoList,
+					foodInfo.getFoodName(),
+					foodInfo.getWeight(),
+					foodInfo.getCal(),
+					foodInfo.getPro(),
+					foodInfo.getFat(),
+					foodInfo.getCarbo(),
+					foodInfo.getRemarks()
+					);
 
 			//セッションに設定
 			session.setAttribute("list", foodInfoList);

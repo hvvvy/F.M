@@ -15,11 +15,7 @@
 		ArrayList<FoodInfomation> foodInfoList =
 			(ArrayList<FoodInfomation>)session.getAttribute("list");
 		if(foodInfoList != null){
-		for(int i = 0;i < foodInfoList.size();i++){
-			request.setAttribute("foodName", (foodInfoList.get(i).getFoodName()));
-			request.setAttribute("weight", (foodInfoList.get(i).getWeight()));
-			request.setAttribute("cal", (foodInfoList.get(i).getCal()));
-		}
+
 	%>
 	<table>
 	<%
@@ -27,7 +23,7 @@
 	%>
 			<tr>
 				<td><%=(i+1) %></td>
-				<td><a href="detail.jsp"><%=foodInfoList.get(i).getFoodName() %></a></td>
+				<td><a href="DetailServlet"><%=foodInfoList.get(i).getFoodName() %></a></td>
 				<td><%=foodInfoList.get(i).getWeight() %>g　は</td>
 				<td><%=foodInfoList.get(i).getCal() %>cal</td>
 			</tr>

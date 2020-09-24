@@ -1,3 +1,5 @@
+<%@page import="model.FoodInfomation" %>
+<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,20 +10,23 @@
 </head>
 <body>
 		<%
-		String foodName = (String)request.getAttribute("foodName");
-		String weight = (String)request.getAttribute("weight");
-		String cal = (String)request.getAttribute("cal");
+		ArrayList<FoodInfomation> foodInfoList =
+		(ArrayList<FoodInfomation>)session.getAttribute("list");
+			for(int i = 0;i < foodInfoList.size();i++){
 		%>
-	<p>
-		<%=foodName %>　<%=weight %>g　は　<%=cal %>cal
-	</p>
+				<%=foodInfoList.get(i).getFoodName()%>
+				<%=foodInfoList.get(i).getWeight() %>g　は
+				<%=foodInfoList.get(i).getCal() %>cal
 
-	<p>
-		タンパク質　g<br>
-		脂質　　　　g<br>
-		炭水化物　g<br><br>
-		備考：
-	</p>
+			<p>
+				タンパク質　<%=foodInfoList.get(i).getPro()%>g<br>
+				脂質　　　　<%=foodInfoList.get(i).getFat()%>g<br>
+				炭水化物　<%=foodInfoList.get(i).getCarbo()%>g<br><br>
+				備考：<%=foodInfoList.get(i).getRemarks()%>
+			</p>
+		<%
+			}
+		%>
 	<p><a href="calculation.jsp">戻る</a></p>
 </body>
 </html>
