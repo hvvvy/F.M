@@ -12,6 +12,7 @@
 		<%
 		ArrayList<FoodInfomation> foodInfoList =
 		(ArrayList<FoodInfomation>)session.getAttribute("list");
+		int num = (Integer)request.getAttribute("num");
 			for(int i = 0;i < foodInfoList.size();i++){
 		%>
 				<%=foodInfoList.get(i).getFoodName()%>
@@ -22,7 +23,13 @@
 				タンパク質　<%=foodInfoList.get(i).getPro()%>g<br>
 				脂質　　　　<%=foodInfoList.get(i).getFat()%>g<br>
 				炭水化物　<%=foodInfoList.get(i).getCarbo()%>g<br><br>
-				備考：<%=foodInfoList.get(i).getRemarks()%>
+			<%
+				if(foodInfoList.get(i).getRemarks() != null){
+			%>
+					備考：<%=foodInfoList.get(i).getRemarks()%>
+			<%
+				}
+			%>
 			</p>
 		<%
 			}
