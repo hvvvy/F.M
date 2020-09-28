@@ -35,7 +35,7 @@ public class CalculationServlet extends HttpServlet {
 		try {
 			FoodInfomationDao foodInfoDao = new FoodInfomationDao();
 			//取得した情報を基にCaluclationクラスで計算
-			Calculation calculation = foodInfoDao.doSearch(foodName,weight);
+			Calculation calculation = foodInfoDao.doSearch(foodName,weight,totalCal);
 			//計算された情報をmodelクラスに格納
 			//このfoodInfoはdetail.jsp(詳細画面)で使用
 			FoodInfomation foodInfo = calculation.getResult();

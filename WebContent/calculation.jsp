@@ -39,8 +39,6 @@
 				<td><%=foodInfoList.get(i).getCal() %>kcal</td>
 			</tr>
 		<%
-				//食材のカロリーをtotalCalへセット
-				totalCal.setTotalCal(foodInfoList.get(i).getCal());
 			}
 		%>
 	</table>

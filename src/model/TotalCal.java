@@ -8,7 +8,7 @@ public class TotalCal {
 	public int getTotalCal() {
 		return totalCal;
 	}
-	public void setTotalCal(int totalCal) {
-		this.totalCal += totalCal;
+	public void setTotalCal(int cal) {
+		this.totalCal += cal;
 	}
 }

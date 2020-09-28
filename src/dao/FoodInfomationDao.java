@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import exception.CalorieException;
 import model.Calculation;
+import model.TotalCal;
 
 public class FoodInfomationDao {
 
@@ -21,7 +22,7 @@ public class FoodInfomationDao {
 		getConnection();
 	}
 
-	public Calculation doSearch(String foodName,int weight)
+	public Calculation doSearch(String foodName,int weight,TotalCal totalCal)
 		throws CalorieException{
 			//食材情報
 			Calculation calculation = null;
@@ -37,7 +38,7 @@ public class FoodInfomationDao {
 					String fat = rs.getString("fat");
 					String carbo = rs.getString("carbohydrate");
 					String remarks = rs.getString("remarks");
-					calculation = new Calculation(foodName,weight,pro,fat,carbo,remarks);
+					calculation = new Calculation(foodName,weight,pro,fat,carbo,remarks,totalCal);
 				}
 
 				//結果を確認
