@@ -22,12 +22,14 @@ import model.TotalCal;
 @WebServlet("/CalculationServlet")
 public class CalculationServlet extends HttpServlet {
 
+			//合計カロリーを保持するクラス
+			TotalCal totalCal = new TotalCal();
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String foodName = request.getParameter("foodName");
 		int weight = Integer.parseInt(request.getParameter("weight"));
-		//合計カロリーを保持するクラス
-		TotalCal totalCal = new TotalCal();
+
 
 
 		//入力された食材名を基にDBにログイン処理
@@ -79,6 +81,9 @@ public class CalculationServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.invalidate();
+		//合計カロリーの値をクリア
+		totalCal.setTotalCal(0);/**もう1つの案としてクラスを新しく作成する→クリアするたびにオブジェクトを作成するので非効率的
+								new TotalCal();**/
 
 		//セッションの情報をクリアしてもう一度計算画面を表示
 		RequestDispatcher rd =

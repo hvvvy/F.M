@@ -9,6 +9,10 @@ public class TotalCal {
 		return totalCal;
 	}
 	public void setTotalCal(int cal) {
+		this.totalCal = cal;
+	}
+
+	public void setTotalCals(int cal) {
 		this.totalCal += cal;
 	}
 }

@@ -20,7 +20,7 @@ public class Calculation {
 		//計算したPFCを基にカロリーを算出
 		cal = (int)((resultPro * 4) + (resultFat * 9) + (resultCarbo * 4));
 		//食材のカロリーをtotalCalへセット
-		totalCal.setTotalCal(cal);
+		totalCal.setTotalCals(cal);
 		//モデルに格納
 		foodInfo = new FoodInfomation(foodName,weight,cal,resultPro,resultFat,resultCarbo,remarks);
 
