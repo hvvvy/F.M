@@ -9,7 +9,7 @@ public class FoodInfomation {
 	double fat;
 	double carbo;
 	String remarks;
-
+	int totalCal;
 
 	public FoodInfomation(String resultFoodName,
 						int resultWeight,
@@ -86,5 +86,12 @@ public class FoodInfomation {
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public int getTotalCal() {
+		return totalCal;
+	}
+	public void setTotalCal(int totalCal) {
+		this.totalCal = totalCal;
 	}
 }

@@ -16,6 +16,7 @@ import exception.CalorieException;
 import model.Calculation;
 import model.FoodInfomation;
 import model.FoodInfomationManager;
+import model.TotalCal;
 
 
 @WebServlet("/CalculationServlet")
@@ -25,6 +26,8 @@ public class CalculationServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String foodName = request.getParameter("foodName");
 		int weight = Integer.parseInt(request.getParameter("weight"));
+		//合計カロリーを保持するクラス
+		TotalCal totalCal = new TotalCal();
 
 
 		//入力された食材名を基にDBにログイン処理
@@ -43,6 +46,7 @@ public class CalculationServlet extends HttpServlet {
 			ArrayList<FoodInfomation> foodInfoList =
 					(ArrayList<FoodInfomation>)session.getAttribute("list");
 
+
 			//モデルに一覧追加処理を指示
 			FoodInfomationManager foodInfoManager = new FoodInfomationManager();
 			foodInfoList = foodInfoManager.getFoodInfoList(
@@ -58,6 +62,8 @@ public class CalculationServlet extends HttpServlet {
 
 			//セッションに設定
 			session.setAttribute("list", foodInfoList);
+			//セッションにTotalCalを設定
+			session.setAttribute("totalCal", totalCal);
 
 		} catch (CalorieException e) {
 			e.printStackTrace();
