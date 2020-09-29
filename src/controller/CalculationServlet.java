@@ -26,15 +26,18 @@ public class CalculationServlet extends HttpServlet {
 			TotalCal totalCal = new TotalCal();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String foodName = request.getParameter("foodName");
-		int weight = Integer.parseInt(request.getParameter("weight"));
 
-
-
-		//入力された食材名を基にDBにログイン処理
-		//なければ例外（CalorieException)を発生させる
+			String message;
 		try {
+			request.setCharacterEncoding("UTF-8");
+			String foodName = request.getParameter("foodName");
+			//重量が正しく入力されなければ例外(NumberFormatException)を発生させる
+			int weight = Integer.parseInt(request.getParameter("weight"));
+
+
+
+			//入力された食材名を基にDBにログイン処理
+			//なければ例外（CalorieException)を発生させる
 			FoodInfomationDao foodInfoDao = new FoodInfomationDao();
 			//取得した情報を基にCaluclationクラスで計算
 			Calculation calculation = foodInfoDao.doSearch(foodName,weight,totalCal);
@@ -69,6 +72,9 @@ public class CalculationServlet extends HttpServlet {
 
 		} catch (CalorieException e) {
 			e.printStackTrace();
+		}catch (NumberFormatException e) {
+			message = "食材名または重量(g)が正しく入力されていません。";
+			request.setAttribute("message",message);
 		}
 
 		//セッションの情報を表示させるためにもう一度計算画面を表示

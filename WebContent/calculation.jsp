@@ -10,7 +10,7 @@
 <title>カロリー計算 M.M</title>
 </head>
 <body>
-	<h1>カロリー計算 M.M</h1>
+	<h1>カロリー計算 F.M</h1>
 	<h2>食材名、重量(g)を入力してください</h2>
 	<%
 		//list(食材の情報)を取得
@@ -19,6 +19,8 @@
 		//totalCalを取得
 		TotalCal totalCal =
 				(TotalCal)session.getAttribute("totalCal");
+		//messageを取得
+		String message = (String)request.getAttribute("message");
 
 		if(foodInfoList != null){
 	%>
@@ -45,6 +47,13 @@
 	<p><%--累計した合計カロリーを表示 --%>
 		合計<%=totalCal.getTotalCal()%>kcal
 	</p>
+	<%
+		}
+		//例外が発生した時messageを表示する
+		if(message != null){
+	%>
+			<p><%=message %></p>
+
 	<%
 		}
 	%>

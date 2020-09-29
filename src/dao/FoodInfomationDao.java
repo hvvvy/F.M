@@ -42,8 +42,9 @@ public class FoodInfomationDao {
 				}
 
 				//結果を確認
+				//食材名が正しく入力されなければ例外(NumberFormatException)を発生させる
 				if(calculation == null) {
-					throw new CalorieException("取得できませんでした");
+					throw new NumberFormatException();
 				}
 			}catch(SQLException e) {
 				e.printStackTrace();
