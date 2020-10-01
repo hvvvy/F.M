@@ -11,7 +11,7 @@
 <title>カロリー計算 M.M</title>
 </head>
 <body>
-	<h1<%--class="set2"--%>><span>カロリー計算 F.M</span></h1>
+	<h1<%--　class="set2"--%>><span>カロリー計算 F.M</span></h1>
 	<h2>食材名、重量(g)を入力してください</h2>
 	<%
 		//list(食材の情報)を取得
