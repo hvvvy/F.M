@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%--<link rel="stylesheet" href="button.css" type="text/css"> --%>
 <title>詳細画面</title>
 </head>
 <body>
@@ -30,6 +31,11 @@
 				}
 			%>
 			</p>
-	<p><a href="calculation.jsp">戻る</a></p>
+	<p>
+	<div class="btn-wrap">
+	<%--<a href="calculation.jsp" class="btn btn-switch"><span>戻る</span></a> --%>
+	<a href="calculation.jsp">戻る</a>
+	</div>
+	</p>
 </body>
 </html>
